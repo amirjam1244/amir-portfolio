@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Vazirmatn } from "next/font/google";
+import { AuthProvider } from "@/context/AuthProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -17,7 +18,7 @@ const vazirmatn = Vazirmatn({
 export const metadata: Metadata = {
   title: "Amirhossein Jamshidi",
   description:
-    "Personal Portfolio — Web Developer specializing in React and Next.js",
+    "Frontend Developer building modern, fast and responsive web applications with React and Next.js. I help businesses and individuals turn ideas into high-quality digital products.",
 };
 
 export default function RootLayout({
@@ -30,8 +31,8 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${vazirmatn.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-black font-sans text-base text-zinc-300">
-        {children}
+      <body className="min-h-full bg-[#08080d] font-sans text-base text-zinc-300">
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

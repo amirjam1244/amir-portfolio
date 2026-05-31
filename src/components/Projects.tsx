@@ -51,40 +51,32 @@ function ProjectCard({ project }: { project: Project }) {
     <motion.article
       variants={fadeInUp}
       transition={defaultTransition}
-      whileHover={{ y: -4 }}
-      className="group flex flex-col rounded-xl border border-zinc-800 bg-zinc-950 p-7 transition-colors duration-300 hover:border-zinc-700 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
+      className="glass-card glass-card-hover group flex h-full flex-col p-8"
     >
+      <div className="mb-5 h-px w-12 rounded-full bg-gradient-to-r from-indigo-400/80 to-violet-400/40 transition-all duration-300 group-hover:w-16" />
+
       <h3 className="text-card-title">{project.name}</h3>
 
       <p className="text-body mt-4 flex-1 text-sm sm:text-base">
         {project.description}
       </p>
 
-      <ul className="mt-5 flex flex-wrap gap-2">
+      <ul className="mt-6 flex flex-wrap gap-2">
         {project.tech.map((item) => (
-          <li
-            key={item}
-            className="rounded-full border border-zinc-800 px-3 py-1 text-xs text-zinc-300"
-          >
+          <li key={item} className="tag-pill">
             {item}
           </li>
         ))}
       </ul>
 
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="mt-8 flex flex-wrap gap-3 border-t border-white/[0.06] pt-6">
         <motion.div {...hoverScale} className="inline-block">
-          <Link
-            href={project.github}
-            className="text-button rounded-lg border border-zinc-700 px-4 py-2.5 text-white transition-colors hover:border-zinc-500 hover:bg-zinc-900"
-          >
+          <Link href={project.github} className="btn-ghost">
             GitHub
           </Link>
         </motion.div>
         <motion.div {...hoverScale} className="inline-block">
-          <Link
-            href={project.demo}
-            className="text-button rounded-lg bg-white px-4 py-2.5 text-black transition-colors hover:bg-zinc-200"
-          >
+          <Link href={project.demo} className="btn-accent">
             Live Demo
           </Link>
         </motion.div>
@@ -98,14 +90,17 @@ export default function Projects() {
     <section id="projects" className="section-padding">
       <div className="mx-auto max-w-6xl">
         <FadeIn className="text-center">
-          <h2 className="text-section-title">Projects</h2>
+          <p className="text-sm font-semibold uppercase tracking-widest text-indigo-400/80">
+            Portfolio
+          </p>
+          <h2 className="text-section-title mt-4">Projects</h2>
           <p className="text-section-subtitle">
             Some things I&apos;ve built
           </p>
         </FadeIn>
 
         <motion.div
-          className="section-header-spacing grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+          className="section-header-spacing grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}

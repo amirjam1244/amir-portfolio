@@ -19,7 +19,7 @@ export const defaultTransition = {
 export const viewportOnce = { once: true, margin: "-80px" as const };
 
 export const hoverScale = {
-  whileHover: { scale: 1.03 },
+  whileHover: { scale: 1.02, y: -1 },
   whileTap: { scale: 0.98 },
-  transition: { duration: 0.2, ease: "easeOut" as const },
+  transition: { duration: 0.25, ease: [0.25, 0.1, 0.25, 1] as const },
 };

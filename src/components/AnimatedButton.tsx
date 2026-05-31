@@ -12,10 +12,8 @@ type AnimatedButtonProps = {
 };
 
 const variants = {
-  primary:
-    "text-button rounded-lg bg-white px-8 py-3.5 text-black transition-colors hover:bg-zinc-200",
-  secondary:
-    "text-button rounded-lg border border-zinc-700 px-8 py-3.5 text-white transition-colors hover:border-zinc-500 hover:bg-zinc-900",
+  primary: "btn-primary",
+  secondary: "btn-secondary",
 };
 
 export default function AnimatedButton({
