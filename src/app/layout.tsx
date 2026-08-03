@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Vazirmatn } from "next/font/google";
-import { AuthProvider } from "@/context/AuthProvider";
+import Providers from "@/components/providers/Providers";
+import { baseMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,11 +16,7 @@ const vazirmatn = Vazirmatn({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Amirhossein Jamshidi",
-  description:
-    "Frontend Developer building modern, fast and responsive web applications with React and Next.js. I help businesses and individuals turn ideas into high-quality digital products.",
-};
+export const metadata: Metadata = baseMetadata;
 
 export default function RootLayout({
   children,
@@ -29,10 +26,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${vazirmatn.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#08080d] font-sans text-base text-zinc-300">
-        <AuthProvider>{children}</AuthProvider>
+      <body className="min-h-full bg-background font-sans text-base text-foreground">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-white"
+        >
+          Skip to main content
+        </a>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

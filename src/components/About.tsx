@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import FadeIn from "@/components/FadeIn";
+import SectionHeader from "@/components/SectionHeader";
 import { defaultTransition, fadeInUp, viewportOnce } from "@/lib/motion";
 
 const skills = [
@@ -19,12 +19,7 @@ export default function About() {
   return (
     <section id="about" className="section-padding">
       <div className="mx-auto max-w-6xl">
-        <FadeIn className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-indigo-400/80">
-            About
-          </p>
-          <h2 className="text-section-title mt-4">About Me</h2>
-        </FadeIn>
+        <SectionHeader eyebrow="About" title="About Me" />
 
         <motion.div
           className="section-header-spacing grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10"
@@ -57,7 +52,7 @@ export default function About() {
                   key={skill}
                   whileHover={{ y: -3, scale: 1.02 }}
                   transition={{ duration: 0.2 }}
-                  className="tag-pill cursor-default px-4 py-2 text-sm transition-colors hover:border-indigo-400/30 hover:bg-indigo-400/10 hover:text-white"
+                  className="tag-pill cursor-default px-4 py-2 text-sm transition-colors hover:border-indigo-400/30 hover:bg-indigo-400/10 hover:text-foreground"
                 >
                   {skill}
                 </motion.li>

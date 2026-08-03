@@ -3,7 +3,7 @@ import ProductsGrid from "@/components/ProductsGrid";
 
 export default function ProductsPage() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-[#08080d] text-white">
+    <main className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       <div className="ambient-glow" aria-hidden="true" />
       <div className="relative z-10">
         <Navbar />

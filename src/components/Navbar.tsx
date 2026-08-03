@@ -4,11 +4,14 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthProvider";
 
 const navLinks = [
   { href: "/#projects", label: "Projects", section: "projects" },
+  { href: "/#stats", label: "Stats", section: "stats" },
   { href: "/#about", label: "About", section: "about" },
+  { href: "/#testimonials", label: "Testimonials", section: "testimonials" },
   { href: "/#services", label: "Services", section: "services" },
   { href: "/products", label: "Products", section: "products" },
   { href: "/#contact", label: "Contact", section: "contact" },
@@ -69,23 +72,26 @@ export default function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled || !isHome
-          ? "border-b border-white/[0.08] bg-[#08080d]/70 shadow-[0_8px_32px_rgb(0_0_0/0.3)] backdrop-blur-2xl backdrop-saturate-150"
+          ? "border-b border-border-subtle bg-background/80 shadow-lg backdrop-blur-2xl backdrop-saturate-150"
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 sm:px-8">
+      <nav
+        className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-5 sm:px-8"
+        aria-label="Main navigation"
+      >
         <motion.div whileHover={{ opacity: 0.8 }} transition={{ duration: 0.2 }}>
-          <Link href="/" className="text-nav-brand">
+          <Link href="/" className="text-nav-brand" aria-label="Home">
             Amirhossein
           </Link>
         </motion.div>
 
-        <ul className="flex items-center gap-1 sm:gap-2">
+        <ul className="flex max-w-[48vw] items-center gap-1 overflow-x-auto sm:max-w-none lg:gap-2">
           {!isHome && (
             <li>
               <Link
                 href="/"
-                className="group relative px-3 py-2 text-zinc-400 transition-colors hover:text-zinc-200 sm:px-4"
+                className="group relative px-3 py-2 text-muted transition-colors hover:text-foreground sm:px-4"
               >
                 <span className="text-nav-link">Home</span>
               </Link>
@@ -103,8 +109,9 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   className={`group relative px-3 py-2 sm:px-4 ${
-                    isActive ? "text-white" : "text-zinc-400 hover:text-zinc-200"
+                    isActive ? "text-foreground" : "text-muted hover:text-foreground"
                   }`}
+                  aria-current={isActive ? "page" : undefined}
                 >
                   <span className="text-nav-link">{link.label}</span>
                   <span
@@ -113,66 +120,47 @@ export default function Navbar() {
                         ? "scale-x-100"
                         : "scale-x-0 group-hover:scale-x-100"
                     }`}
+                    aria-hidden="true"
                   />
                 </Link>
               </li>
             );
           })}
+        </ul>
+
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle />
 
           {!loading &&
             (user ? (
               <>
-                <li>
-                  <Link
-                    href="/dashboard"
-                    className={`group relative px-3 py-2 sm:px-4 ${
-                      pathname === "/dashboard"
-                        ? "text-white"
-                        : "text-zinc-400 hover:text-zinc-200"
-                    }`}
-                  >
-                    <span className="text-nav-link">Dashboard</span>
-                    <span
-                      className={`absolute inset-x-3 bottom-1 h-px origin-left rounded-full bg-gradient-to-r from-indigo-400 to-violet-400 transition-transform duration-300 sm:inset-x-4 ${
-                        pathname === "/dashboard"
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover:scale-x-100"
-                      }`}
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    className="text-nav-link px-3 py-2 text-zinc-400 transition-colors hover:text-zinc-200 sm:px-4"
-                  >
-                    Logout
-                  </button>
-                </li>
+                <Link
+                  href="/dashboard"
+                  className="hidden text-sm font-medium text-muted hover:text-foreground sm:inline"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="hidden text-sm font-medium text-muted hover:text-foreground sm:inline"
+                >
+                  Logout
+                </button>
               </>
             ) : (
-              <li>
-                <Link
-                  href="/login"
-                  className={`group relative px-3 py-2 sm:px-4 ${
-                    pathname === "/login" || pathname === "/register"
-                      ? "text-white"
-                      : "text-zinc-400 hover:text-zinc-200"
-                  }`}
-                >
-                  <span className="text-nav-link">Login</span>
-                  <span
-                    className={`absolute inset-x-3 bottom-1 h-px origin-left rounded-full bg-gradient-to-r from-indigo-400 to-violet-400 transition-transform duration-300 sm:inset-x-4 ${
-                      pathname === "/login" || pathname === "/register"
-                        ? "scale-x-100"
-                        : "scale-x-0 group-hover:scale-x-100"
-                    }`}
-                  />
-                </Link>
-              </li>
+              <Link
+                href="/login"
+                className="hidden text-sm font-medium text-muted hover:text-foreground sm:inline"
+              >
+                Login
+              </Link>
             ))}
-        </ul>
+
+          <Link href="/#contact" className="btn-primary px-4 py-2 text-sm sm:px-5">
+            Hire Me
+          </Link>
+        </div>
       </nav>
     </header>
   );
